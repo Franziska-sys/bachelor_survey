@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Umfrage: HTML5 Frameworks vs. Game Engines</title>
+<title>Survey: HTML5 Frameworks vs. Game Engines</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -29,7 +29,6 @@
     overflow-x: hidden;
   }
 
-  /* animated grid background */
   body::before {
     content: '';
     position: fixed;
@@ -58,7 +57,6 @@
     padding: 40px 24px 100px;
   }
 
-  /* HEADER */
   header {
     margin-bottom: 56px;
     animation: fadeUp 0.7s ease both;
@@ -113,7 +111,6 @@
 
   .meta-item span { color: var(--accent); }
 
-  /* PROGRESS */
   .progress-wrap {
     position: sticky;
     top: 0;
@@ -155,7 +152,6 @@
     width: 0%;
   }
 
-  /* SECTIONS */
   .section {
     margin-bottom: 48px;
     animation: fadeUp 0.5s ease both;
@@ -187,7 +183,6 @@
     letter-spacing: -0.01em;
   }
 
-  /* QUESTION CARD */
   .q-card {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -209,15 +204,11 @@
   }
 
   .q-card:has(input:checked)::before,
-  .q-card:has(select:focus)::before,
-  .q-card:has(textarea:focus)::before,
-  .q-card.answered::before {
+  .q-card:has(textarea:focus)::before {
     background: linear-gradient(180deg, var(--accent), var(--accent3));
   }
 
-  .q-card:hover {
-    border-color: rgba(0,229,255,0.25);
-  }
+  .q-card:hover { border-color: rgba(0,229,255,0.25); }
 
   .q-label {
     font-size: 15px;
@@ -236,12 +227,8 @@
     flex-shrink: 0;
   }
 
-  .q-required {
-    color: var(--accent2);
-    font-size: 13px;
-  }
+  .q-required { color: var(--accent2); font-size: 13px; }
 
-  /* RADIO / CHECKBOX OPTIONS */
   .options {
     display: flex;
     flex-direction: column;
@@ -284,9 +271,7 @@
     position: relative;
   }
 
-  .opt-label input[type="checkbox"] {
-    border-radius: 3px;
-  }
+  .opt-label input[type="checkbox"] { border-radius: 3px; }
 
   .opt-label input[type="radio"]:checked,
   .opt-label input[type="checkbox"]:checked {
@@ -321,12 +306,7 @@
     color: var(--accent);
   }
 
-  /* SCALE */
-  .scale-wrap {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
+  .scale-wrap { display: flex; flex-direction: column; gap: 6px; }
 
   .scale-labels {
     display: flex;
@@ -337,10 +317,7 @@
     padding: 0 2px;
   }
 
-  .scale-options {
-    display: flex;
-    gap: 6px;
-  }
+  .scale-options { display: flex; gap: 6px; }
 
   .scale-opt {
     flex: 1;
@@ -389,48 +366,6 @@
     color: var(--muted);
   }
 
-  /* SELECT */
-  select {
-    width: 100%;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    color: var(--text);
-    padding: 11px 14px;
-    font-family: 'Syne', sans-serif;
-    font-size: 14px;
-    cursor: pointer;
-    outline: none;
-    transition: border-color 0.2s;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 7L11 1' stroke='%236b6b8a' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 14px center;
-  }
-
-  select:focus { border-color: var(--accent); }
-
-  /* TEXTAREA */
-  textarea {
-    width: 100%;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    color: var(--text);
-    padding: 12px 14px;
-    font-family: 'Syne', sans-serif;
-    font-size: 14px;
-    resize: vertical;
-    outline: none;
-    transition: border-color 0.2s;
-    min-height: 90px;
-    line-height: 1.6;
-  }
-
-  textarea:focus { border-color: var(--accent); }
-  textarea::placeholder { color: var(--muted); }
-
-  /* COMPARISON TABLE */
   .compare-table {
     width: 100%;
     border-collapse: collapse;
@@ -460,10 +395,7 @@
 
   .compare-table tr:last-child td { border-bottom: none; }
   .compare-table tr:hover td { background: rgba(255,255,255,0.02); }
-
-  .compare-table td:not(:first-child) {
-    text-align: center;
-  }
+  .compare-table td:not(:first-child) { text-align: center; }
 
   .compare-table input[type="radio"] {
     appearance: none;
@@ -476,9 +408,7 @@
     position: relative;
   }
 
-  .compare-table input[type="radio"]:hover {
-    border-color: var(--accent);
-  }
+  .compare-table input[type="radio"]:hover { border-color: var(--accent); }
 
   .compare-table input[type="radio"]:checked {
     border-color: var(--accent);
@@ -500,7 +430,6 @@
   .col-engine { color: var(--accent2) !important; }
   .col-neutral { color: var(--accent3) !important; }
 
-  /* INFO NOTE */
   .note {
     font-family: 'Space Mono', monospace;
     font-size: 11px;
@@ -513,7 +442,6 @@
     line-height: 1.6;
   }
 
-  /* SUBMIT */
   .submit-area {
     margin-top: 48px;
     text-align: center;
@@ -554,7 +482,6 @@
     line-height: 1.7;
   }
 
-  /* SUCCESS SCREEN */
   .success-screen {
     display: none;
     text-align: center;
@@ -562,10 +489,7 @@
     animation: fadeUp 0.6s ease both;
   }
 
-  .success-icon {
-    font-size: 56px;
-    margin-bottom: 20px;
-  }
+  .success-icon { font-size: 56px; margin-bottom: 20px; }
 
   .success-screen h2 {
     font-size: 28px;
@@ -599,12 +523,11 @@
 <body>
 <div class="noise"></div>
 
-<!-- sticky progress -->
 <div class="progress-wrap">
   <div class="progress-inner">
     <div class="progress-label">
-      <span>Fortschritt</span>
-      <span id="prog-text">0 / 20 Fragen</span>
+      <span>Progress</span>
+      <span id="prog-text">0 / 20 Questions</span>
     </div>
     <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
   </div>
@@ -612,21 +535,20 @@
 
 <div class="wrap">
 
-  <!-- HEADER -->
   <header>
-    <div class="tag">Bachelor-Umfrage &nbsp;·&nbsp; 2025</div>
+    <div class="tag">Bachelor Thesis Survey &nbsp;·&nbsp; 2026</div>
     <h1>
       <span class="hl1">HTML5 Frameworks</span><br>
       vs. <span class="hl2">Game Engines</span><br>
-      in der Spieleentwicklung
+      in Game Development
     </h1>
     <p class="subtitle">
-      Diese Umfrage vergleicht zwei Ansätze für die Entwicklung von Browserspielen und interaktiven Anwendungen. Deine Antworten fließen anonym in eine Bachelorarbeit ein.
+      This survey compares two approaches to browser-based game development. Your answers will be used anonymously as part of a bachelor's thesis.
     </p>
     <div class="meta-bar">
-      <div class="meta-item">⏱ Ca. <span>8–12 Minuten</span></div>
-      <div class="meta-item">❓ <span>20 Fragen</span></div>
-      <div class="meta-item">🔒 <span>Anonym & vertraulich</span></div>
+      <div class="meta-item">⏱ Approx. <span>8–12 minutes</span></div>
+      <div class="meta-item">❓ <span>20 Questions</span></div>
+      <div class="meta-item">🔒 <span>Anonymous & confidential</span></div>
     </div>
   </header>
 
@@ -636,38 +558,38 @@
     <div class="section" style="--i:0">
       <div class="section-header">
         <span class="section-num">01</span>
-        <span class="section-title">Demografische Angaben &amp; Hintergrund</span>
+        <span class="section-title">Background & Experience</span>
       </div>
 
       <div class="q-card" id="q1-card">
-        <div class="q-label"><span class="q-num">1.</span><span>Wie würdest du deine Erfahrung in der Softwareentwicklung insgesamt einschätzen? <span class="q-required">*</span></span></div>
+        <div class="q-label"><span class="q-num">1.</span><span>How would you rate your overall experience in software development? <span class="q-required">*</span></span></div>
         <div class="options">
-          <label class="opt-label"><input type="radio" name="q1" value="beginner" required> Einsteiger (0–1 Jahr)</label>
-          <label class="opt-label"><input type="radio" name="q1" value="intermediate"> Fortgeschritten (2–4 Jahre)</label>
-          <label class="opt-label"><input type="radio" name="q1" value="experienced"> Erfahren (5–9 Jahre)</label>
-          <label class="opt-label"><input type="radio" name="q1" value="expert"> Expert:in (10+ Jahre)</label>
+          <label class="opt-label"><input type="radio" name="q1" value="beginner" required> Beginner (0–1 year)</label>
+          <label class="opt-label"><input type="radio" name="q1" value="intermediate"> Intermediate (2–4 years)</label>
+          <label class="opt-label"><input type="radio" name="q1" value="experienced"> Experienced (5–9 years)</label>
+          <label class="opt-label"><input type="radio" name="q1" value="expert"> Expert (10+ years)</label>
         </div>
       </div>
 
       <div class="q-card" id="q2-card">
-        <div class="q-label"><span class="q-num">2.</span><span>In welchem Bereich bist du hauptsächlich tätig / ausgebildet? <span class="q-required">*</span></span></div>
+        <div class="q-label"><span class="q-num">2.</span><span>What is your primary field of work or study? <span class="q-required">*</span></span></div>
         <div class="options grid-2">
-          <label class="opt-label"><input type="radio" name="q2" value="webdev" required> Webentwicklung</label>
-          <label class="opt-label"><input type="radio" name="q2" value="gamedev"> Spieleentwicklung</label>
+          <label class="opt-label"><input type="radio" name="q2" value="webdev" required> Web Development</label>
+          <label class="opt-label"><input type="radio" name="q2" value="gamedev"> Game Development</label>
           <label class="opt-label"><input type="radio" name="q2" value="software"> Software Engineering</label>
           <label class="opt-label"><input type="radio" name="q2" value="design"> Game Design / UX</label>
-          <label class="opt-label"><input type="radio" name="q2" value="student"> Student:in (Informatik/Medien)</label>
-          <label class="opt-label"><input type="radio" name="q2" value="other"> Anderes</label>
+          <label class="opt-label"><input type="radio" name="q2" value="student"> Student (CS / Media)</label>
+          <label class="opt-label"><input type="radio" name="q2" value="other"> Other</label>
         </div>
       </div>
 
       <div class="q-card" id="q3-card">
-        <div class="q-label"><span class="q-num">3.</span><span>Hast du bereits Spiele oder interaktive Anwendungen entwickelt? <span class="q-required">*</span></span></div>
+        <div class="q-label"><span class="q-num">3.</span><span>Have you previously developed games or interactive applications? <span class="q-required">*</span></span></div>
         <div class="options">
-          <label class="opt-label"><input type="radio" name="q3" value="none" required> Nein, noch nicht</label>
-          <label class="opt-label"><input type="radio" name="q3" value="hobby"> Ja, als Hobby / privat</label>
-          <label class="opt-label"><input type="radio" name="q3" value="study"> Ja, im Studium / Ausbildung</label>
-          <label class="opt-label"><input type="radio" name="q3" value="professional"> Ja, professionell / beruflich</label>
+          <label class="opt-label"><input type="radio" name="q3" value="none" required> No, not yet</label>
+          <label class="opt-label"><input type="radio" name="q3" value="hobby"> Yes, as a hobby / personal project</label>
+          <label class="opt-label"><input type="radio" name="q3" value="study"> Yes, during studies / training</label>
+          <label class="opt-label"><input type="radio" name="q3" value="professional"> Yes, professionally</label>
         </div>
       </div>
     </div>
@@ -676,27 +598,27 @@
     <div class="section" style="--i:1">
       <div class="section-header">
         <span class="section-num">02</span>
-        <span class="section-title">Erfahrung mit HTML5 Frameworks</span>
+        <span class="section-title">Experience with HTML5 Frameworks</span>
       </div>
 
       <div class="q-card" id="q4-card">
-        <div class="q-label"><span class="q-num">4.</span><span>Welche HTML5-Frameworks / Bibliotheken für Spieleentwicklung hast du verwendet? <span class="q-required">*</span></span></div>
+        <div class="q-label"><span class="q-num">4.</span><span>Which HTML5 frameworks / libraries for game development have you used? <span class="q-required">*</span></span></div>
         <div class="options grid-2">
           <label class="opt-label"><input type="checkbox" name="q4" value="phaser"> Phaser 3 / Phaser CE</label>
           <label class="opt-label"><input type="checkbox" name="q4" value="pixijs"> PixiJS</label>
           <label class="opt-label"><input type="checkbox" name="q4" value="threejs"> Three.js</label>
           <label class="opt-label"><input type="checkbox" name="q4" value="babylonjs"> Babylon.js</label>
-          <label class="opt-label"><input type="checkbox" name="q4" value="kaboom"> Kaboom.js</label>
+          <label class="opt-label"><input type="checkbox" name="q4" value="cocos"> Cocos2D-JS</label>
           <label class="opt-label"><input type="checkbox" name="q4" value="excalibur"> Excalibur.js</label>
-          <label class="opt-label"><input type="checkbox" name="q4" value="canvas-vanilla"> Vanilla Canvas API</label>
-          <label class="opt-label"><input type="checkbox" name="q4" value="none-html"> Noch keines verwendet</label>
+          <label class="opt-label"><input type="checkbox" name="q4" value="canvas-vanilla"> Vanilla Canvas / WebGL</label>
+          <label class="opt-label"><input type="checkbox" name="q4" value="none-html"> None yet</label>
         </div>
       </div>
 
       <div class="q-card" id="q5-card">
-        <div class="q-label"><span class="q-num">5.</span><span>Wie bewertest du deinen Kenntnisstand mit HTML5-basierten Spieleframeworks?</span></div>
+        <div class="q-label"><span class="q-num">5.</span><span>How would you rate your skill level with HTML5-based game frameworks?</span></div>
         <div class="scale-wrap">
-          <div class="scale-labels"><span>Kein Wissen</span><span>Grundkenntnisse</span><span>Sehr gut</span></div>
+          <div class="scale-labels"><span>No knowledge</span><span>Basic knowledge</span><span>Expert</span></div>
           <div class="scale-options">
             <div class="scale-opt"><input type="radio" name="q5" value="1"><span class="scale-num">1</span></div>
             <div class="scale-opt"><input type="radio" name="q5" value="2"><span class="scale-num">2</span></div>
@@ -708,26 +630,26 @@
       </div>
 
       <div class="q-card" id="q6-card">
-        <div class="q-label"><span class="q-num">6.</span><span>Was schätzt du an HTML5 Frameworks für die Spieleentwicklung besonders? (Mehrfachauswahl)</span></div>
+        <div class="q-label"><span class="q-num">6.</span><span>What do you value most about HTML5 frameworks for game development? (Multiple choice)</span></div>
         <div class="options">
-          <label class="opt-label"><input type="checkbox" name="q6" value="deployment"> Einfaches Deployment (Browser, kein Install)</label>
-          <label class="opt-label"><input type="checkbox" name="q6" value="webtech"> Nutzung bekannter Web-Technologien (JS, CSS, HTML)</label>
-          <label class="opt-label"><input type="checkbox" name="q6" value="lightweight"> Geringe Einstiegshürde / kein Download nötig</label>
-          <label class="opt-label"><input type="checkbox" name="q6" value="open-source"> Open-Source &amp; Community</label>
-          <label class="opt-label"><input type="checkbox" name="q6" value="flexibility"> Hohe Flexibilität &amp; Anpassbarkeit</label>
-          <label class="opt-label"><input type="checkbox" name="q6" value="integration"> Integration in Webprojekte / Webseiten</label>
+          <label class="opt-label"><input type="checkbox" name="q6" value="deployment"> Easy deployment – runs directly in the browser, no install</label>
+          <label class="opt-label"><input type="checkbox" name="q6" value="webtech"> Uses familiar web technologies (JS, HTML, CSS)</label>
+          <label class="opt-label"><input type="checkbox" name="q6" value="lightweight"> Low barrier to entry – lightweight &amp; fast to set up</label>
+          <label class="opt-label"><input type="checkbox" name="q6" value="open-source"> Open-source &amp; active community</label>
+          <label class="opt-label"><input type="checkbox" name="q6" value="flexibility"> High flexibility &amp; full code control</label>
+          <label class="opt-label"><input type="checkbox" name="q6" value="integration"> Easy integration into websites or web apps</label>
         </div>
       </div>
 
       <div class="q-card" id="q7-card">
-        <div class="q-label"><span class="q-num">7.</span><span>Was sind für dich die größten Nachteile von HTML5 Frameworks? (Mehrfachauswahl)</span></div>
+        <div class="q-label"><span class="q-num">7.</span><span>What are the biggest disadvantages of HTML5 frameworks for you? (Multiple choice)</span></div>
         <div class="options">
-          <label class="opt-label"><input type="checkbox" name="q7" value="performance"> Geringere Performance bei komplexen Spielen</label>
-          <label class="opt-label"><input type="checkbox" name="q7" value="no-editor"> Kein visueller Editor / alles im Code</label>
-          <label class="opt-label"><input type="checkbox" name="q7" value="assets"> Eingeschränktes Asset-Management</label>
-          <label class="opt-label"><input type="checkbox" name="q7" value="physics"> Weniger ausgereifte Physik-Systeme</label>
-          <label class="opt-label"><input type="checkbox" name="q7" value="scalability"> Schlechte Skalierbarkeit für große Projekte</label>
-          <label class="opt-label"><input type="checkbox" name="q7" value="browser-limits"> Browser-Limitierungen (Audio, Performance)</label>
+          <label class="opt-label"><input type="checkbox" name="q7" value="performance"> Lower performance for complex games</label>
+          <label class="opt-label"><input type="checkbox" name="q7" value="no-editor"> No visual editor – everything in code</label>
+          <label class="opt-label"><input type="checkbox" name="q7" value="assets"> Limited asset management &amp; pipeline</label>
+          <label class="opt-label"><input type="checkbox" name="q7" value="physics"> Less mature physics &amp; collision systems</label>
+          <label class="opt-label"><input type="checkbox" name="q7" value="scalability"> Poor scalability for larger projects</label>
+          <label class="opt-label"><input type="checkbox" name="q7" value="browser-limits"> Browser limitations (audio, memory, threads)</label>
         </div>
       </div>
     </div>
@@ -736,11 +658,11 @@
     <div class="section" style="--i:2">
       <div class="section-header">
         <span class="section-num">03</span>
-        <span class="section-title">Erfahrung mit Game Engines</span>
+        <span class="section-title">Experience with Game Engines</span>
       </div>
 
       <div class="q-card" id="q8-card">
-        <div class="q-label"><span class="q-num">8.</span><span>Welche Game Engines hast du verwendet oder kennengelernt? <span class="q-required">*</span></span></div>
+        <div class="q-label"><span class="q-num">8.</span><span>Which game engines have you used or worked with? <span class="q-required">*</span></span></div>
         <div class="options grid-2">
           <label class="opt-label"><input type="checkbox" name="q8" value="unity"> Unity</label>
           <label class="opt-label"><input type="checkbox" name="q8" value="unreal"> Unreal Engine</label>
@@ -749,14 +671,14 @@
           <label class="opt-label"><input type="checkbox" name="q8" value="gd2"> Construct / GDevelop</label>
           <label class="opt-label"><input type="checkbox" name="q8" value="defold"> Defold</label>
           <label class="opt-label"><input type="checkbox" name="q8" value="rpgmaker"> RPG Maker</label>
-          <label class="opt-label"><input type="checkbox" name="q8" value="none-engine"> Noch keine verwendet</label>
+          <label class="opt-label"><input type="checkbox" name="q8" value="none-engine"> None yet</label>
         </div>
       </div>
 
       <div class="q-card" id="q9-card">
-        <div class="q-label"><span class="q-num">9.</span><span>Wie bewertest du deinen Kenntnisstand mit Game Engines?</span></div>
+        <div class="q-label"><span class="q-num">9.</span><span>How would you rate your skill level with game engines?</span></div>
         <div class="scale-wrap">
-          <div class="scale-labels"><span>Kein Wissen</span><span>Grundkenntnisse</span><span>Sehr gut</span></div>
+          <div class="scale-labels"><span>No knowledge</span><span>Basic knowledge</span><span>Expert</span></div>
           <div class="scale-options">
             <div class="scale-opt"><input type="radio" name="q9" value="1"><span class="scale-num">1</span></div>
             <div class="scale-opt"><input type="radio" name="q9" value="2"><span class="scale-num">2</span></div>
@@ -768,26 +690,26 @@
       </div>
 
       <div class="q-card" id="q10-card">
-        <div class="q-label"><span class="q-num">10.</span><span>Was schätzt du an Game Engines besonders? (Mehrfachauswahl)</span></div>
+        <div class="q-label"><span class="q-num">10.</span><span>What do you value most about game engines? (Multiple choice)</span></div>
         <div class="options">
-          <label class="opt-label"><input type="checkbox" name="q10" value="editor"> Visueller Editor (Scene Editor, Inspector)</label>
-          <label class="opt-label"><input type="checkbox" name="q10" value="assets2"> Umfangreiches Asset-System &amp; Asset Store</label>
-          <label class="opt-label"><input type="checkbox" name="q10" value="physics2"> Ausgereifte Physik, Kollision, KI-Systeme</label>
-          <label class="opt-label"><input type="checkbox" name="q10" value="multiplatform"> Multi-Plattform Export (PC, Mobile, Konsole)</label>
-          <label class="opt-label"><input type="checkbox" name="q10" value="community"> Große Community &amp; Dokumentation</label>
-          <label class="opt-label"><input type="checkbox" name="q10" value="performance2"> Bessere Performance bei komplexen Spielen</label>
+          <label class="opt-label"><input type="checkbox" name="q10" value="editor"> Visual editor (scene editor, inspector, drag &amp; drop)</label>
+          <label class="opt-label"><input type="checkbox" name="q10" value="assets2"> Comprehensive asset system &amp; asset store</label>
+          <label class="opt-label"><input type="checkbox" name="q10" value="physics2"> Mature physics, collision &amp; AI systems</label>
+          <label class="opt-label"><input type="checkbox" name="q10" value="multiplatform"> Multi-platform export (PC, mobile, console)</label>
+          <label class="opt-label"><input type="checkbox" name="q10" value="community"> Large community &amp; extensive documentation</label>
+          <label class="opt-label"><input type="checkbox" name="q10" value="performance2"> Better performance for complex games</label>
         </div>
       </div>
 
       <div class="q-card" id="q11-card">
-        <div class="q-label"><span class="q-num">11.</span><span>Was sind für dich die größten Nachteile von Game Engines? (Mehrfachauswahl)</span></div>
+        <div class="q-label"><span class="q-num">11.</span><span>What are the biggest disadvantages of game engines for you? (Multiple choice)</span></div>
         <div class="options">
-          <label class="opt-label"><input type="checkbox" name="q11" value="learning"> Steile Lernkurve</label>
-          <label class="opt-label"><input type="checkbox" name="q11" value="size"> Große Dateigröße / schwere Runtime</label>
-          <label class="opt-label"><input type="checkbox" name="q11" value="webexport"> Schlechter / aufwändiger Webexport</label>
-          <label class="opt-label"><input type="checkbox" name="q11" value="license"> Lizenzkosten (z.B. Unity Runtime Fee)</label>
-          <label class="opt-label"><input type="checkbox" name="q11" value="overkill"> Überdimensioniert für kleine Projekte</label>
-          <label class="opt-label"><input type="checkbox" name="q11" value="blackbox"> „Black Box" – weniger Kontrolle über den Code</label>
+          <label class="opt-label"><input type="checkbox" name="q11" value="learning"> Steep learning curve &amp; long onboarding time</label>
+          <label class="opt-label"><input type="checkbox" name="q11" value="size"> Large build sizes &amp; heavy runtime (e.g. Unity WebGL 50MB+)</label>
+          <label class="opt-label"><input type="checkbox" name="q11" value="webexport"> Limited browser compatibility (no multithreading, memory limits)</label>
+          <label class="opt-label"><input type="checkbox" name="q11" value="license"> Licensing costs &amp; commercial restrictions (e.g. Unity Runtime Fee)</label>
+          <label class="opt-label"><input type="checkbox" name="q11" value="overkill"> Overkill for small or simple projects</label>
+          <label class="opt-label"><input type="checkbox" name="q11" value="blackbox"> Less control over low-level code &amp; performance</label>
         </div>
       </div>
     </div>
@@ -796,37 +718,37 @@
     <div class="section" style="--i:3">
       <div class="section-header">
         <span class="section-num">04</span>
-        <span class="section-title">Direkter Vergleich &amp; Präferenz</span>
+        <span class="section-title">Direct Comparison &amp; Preference</span>
       </div>
 
       <div class="q-card" id="q12-card">
-        <div class="q-label"><span class="q-num">12.</span><span>Welchen Ansatz würdest du für folgende Spieltypen bevorzugen? <span class="q-required">*</span></span></div>
-        <div class="note">Wähle pro Zeile die bevorzugte Option.</div>
+        <div class="q-label"><span class="q-num">12.</span><span>Which approach would you prefer for each game type? <span class="q-required">*</span></span></div>
+        <div class="note">Select one option per row.</div>
         <br>
         <table class="compare-table">
           <thead>
             <tr>
-              <th>Spieltyp</th>
+              <th>Game Type</th>
               <th class="col-html">HTML5<br>Framework</th>
-              <th class="col-neutral">Egal /<br>Beides</th>
+              <th class="col-neutral">Either /<br>Both</th>
               <th class="col-engine">Game<br>Engine</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>2D Browser-Casual-Game</td>
+              <td>2D Browser Casual Game</td>
               <td><input type="radio" name="cmp1" value="html5"></td>
               <td><input type="radio" name="cmp1" value="equal"></td>
               <td><input type="radio" name="cmp1" value="engine"></td>
             </tr>
             <tr>
-              <td>3D Action / Adventure</td>
+              <td>3D Action / Adventure Game</td>
               <td><input type="radio" name="cmp2" value="html5"></td>
               <td><input type="radio" name="cmp2" value="equal"></td>
               <td><input type="radio" name="cmp2" value="engine"></td>
             </tr>
             <tr>
-              <td>Interaktive Web-Anwendung / Lernspiel</td>
+              <td>Educational / Serious Game</td>
               <td><input type="radio" name="cmp3" value="html5"></td>
               <td><input type="radio" name="cmp3" value="equal"></td>
               <td><input type="radio" name="cmp3" value="engine"></td>
@@ -844,7 +766,7 @@
               <td><input type="radio" name="cmp5" value="engine"></td>
             </tr>
             <tr>
-              <td>Multiplayer Browserspiel</td>
+              <td>Multiplayer Browser Game</td>
               <td><input type="radio" name="cmp6" value="html5"></td>
               <td><input type="radio" name="cmp6" value="equal"></td>
               <td><input type="radio" name="cmp6" value="engine"></td>
@@ -854,21 +776,21 @@
       </div>
 
       <div class="q-card" id="q13-card">
-        <div class="q-label"><span class="q-num">13.</span><span>Wenn du ein neues Browserspiel starten würdest – welchen Ansatz würdest du wählen? <span class="q-required">*</span></span></div>
+        <div class="q-label"><span class="q-num">13.</span><span>If you were starting a new browser-based game today – which approach would you choose? <span class="q-required">*</span></span></div>
         <div class="options">
-          <label class="opt-label"><input type="radio" name="q13" value="html5" required> HTML5 Framework (z.B. Phaser, PixiJS)</label>
-          <label class="opt-label"><input type="radio" name="q13" value="engine"> Game Engine mit Web-Export (z.B. Unity, Godot)</label>
-          <label class="opt-label"><input type="radio" name="q13" value="depends"> Kommt auf das Projekt an</label>
-          <label class="opt-label"><input type="radio" name="q13" value="unsure"> Bin noch unsicher</label>
+          <label class="opt-label"><input type="radio" name="q13" value="html5" required> HTML5 Framework (e.g. Phaser, PixiJS)</label>
+          <label class="opt-label"><input type="radio" name="q13" value="engine"> Game Engine with web export (e.g. Unity, Godot)</label>
+          <label class="opt-label"><input type="radio" name="q13" value="depends"> Depends on the project</label>
+          <label class="opt-label"><input type="radio" name="q13" value="unsure"> Not sure yet</label>
         </div>
       </div>
 
       <div class="q-card" id="q14-card">
-        <div class="q-label"><span class="q-num">14.</span><span>Wie wichtig sind dir folgende Kriterien bei der Toolwahl? (1 = unwichtig, 5 = sehr wichtig)</span></div>
+        <div class="q-label"><span class="q-num">14.</span><span>How important are the following criteria when choosing a tool? (1 = not important, 5 = very important)</span></div>
         <div style="display:flex; flex-direction:column; gap: 16px; margin-top:4px;">
 
           <div>
-            <div style="font-size:13px; color:var(--muted); margin-bottom:8px;">Performance / Laufzeiteffizienz</div>
+            <div style="font-size:13px; color:var(--muted); margin-bottom:8px;">Runtime performance &amp; efficiency</div>
             <div style="display:flex; gap:6px;">
               <div class="scale-opt"><input type="radio" name="crit1" value="1"><span class="scale-num">1</span></div>
               <div class="scale-opt"><input type="radio" name="crit1" value="2"><span class="scale-num">2</span></div>
@@ -879,7 +801,7 @@
           </div>
 
           <div>
-            <div style="font-size:13px; color:var(--muted); margin-bottom:8px;">Einfache Lernkurve &amp; Dokumentation</div>
+            <div style="font-size:13px; color:var(--muted); margin-bottom:8px;">Easy learning curve &amp; documentation</div>
             <div style="display:flex; gap:6px;">
               <div class="scale-opt"><input type="radio" name="crit2" value="1"><span class="scale-num">1</span></div>
               <div class="scale-opt"><input type="radio" name="crit2" value="2"><span class="scale-num">2</span></div>
@@ -890,7 +812,7 @@
           </div>
 
           <div>
-            <div style="font-size:13px; color:var(--muted); margin-bottom:8px;">Browser-Native Deployment (kein Download)</div>
+            <div style="font-size:13px; color:var(--muted); margin-bottom:8px;">Native browser deployment (no download required)</div>
             <div style="display:flex; gap:6px;">
               <div class="scale-opt"><input type="radio" name="crit3" value="1"><span class="scale-num">1</span></div>
               <div class="scale-opt"><input type="radio" name="crit3" value="2"><span class="scale-num">2</span></div>
@@ -901,7 +823,7 @@
           </div>
 
           <div>
-            <div style="font-size:13px; color:var(--muted); margin-bottom:8px;">Visueller Editor &amp; Tooling</div>
+            <div style="font-size:13px; color:var(--muted); margin-bottom:8px;">Visual editor &amp; tooling support</div>
             <div style="display:flex; gap:6px;">
               <div class="scale-opt"><input type="radio" name="crit4" value="1"><span class="scale-num">1</span></div>
               <div class="scale-opt"><input type="radio" name="crit4" value="2"><span class="scale-num">2</span></div>
@@ -912,7 +834,7 @@
           </div>
 
           <div>
-            <div style="font-size:13px; color:var(--muted); margin-bottom:8px;">Open Source &amp; Lizenzkosten</div>
+            <div style="font-size:13px; color:var(--muted); margin-bottom:8px;">Open source &amp; licensing costs</div>
             <div style="display:flex; gap:6px;">
               <div class="scale-opt"><input type="radio" name="crit5" value="1"><span class="scale-num">1</span></div>
               <div class="scale-opt"><input type="radio" name="crit5" value="2"><span class="scale-num">2</span></div>
@@ -929,43 +851,43 @@
     <div class="section" style="--i:4">
       <div class="section-header">
         <span class="section-num">05</span>
-        <span class="section-title">Praxis &amp; Zukunftsperspektive</span>
+        <span class="section-title">Practice &amp; Future Outlook</span>
       </div>
 
       <div class="q-card" id="q15-card">
-        <div class="q-label"><span class="q-num">15.</span><span>Wie schätzt du die Zukunft von HTML5-basierten Spielen im Vergleich zu nativen/engine-basierten Spielen ein?</span></div>
+        <div class="q-label"><span class="q-num">15.</span><span>How do you see the future of HTML5-based games compared to engine-based games?</span></div>
         <div class="options">
-          <label class="opt-label"><input type="radio" name="q15" value="html5wins"> HTML5 wird dominanter – Browserspiele wachsen stark</label>
-          <label class="opt-label"><input type="radio" name="q15" value="engines"> Game Engines bleiben klar führend</label>
-          <label class="opt-label"><input type="radio" name="q15" value="coexist"> Beide Ansätze werden koexistieren &amp; sich ergänzen</label>
-          <label class="opt-label"><input type="radio" name="q15" value="wasm"> WebAssembly macht den Unterschied zunichte</label>
-          <label class="opt-label"><input type="radio" name="q15" value="unsure2"> Schwer zu sagen</label>
+          <label class="opt-label"><input type="radio" name="q15" value="html5wins"> HTML5 gains ground – browser games will grow significantly</label>
+          <label class="opt-label"><input type="radio" name="q15" value="engines"> Game engines remain dominant – even for browser targets</label>
+          <label class="opt-label"><input type="radio" name="q15" value="specialization"> Clear specialization – HTML5 for browser, engines for native platforms</label>
+          <label class="opt-label"><input type="radio" name="q15" value="converge"> The tools will converge – differences become less relevant</label>
+          <label class="opt-label"><input type="radio" name="q15" value="unsure2"> Hard to say</label>
         </div>
       </div>
 
       <div class="q-card" id="q16-card">
-        <div class="q-label"><span class="q-num">16.</span><span>Welche Rolle spielt WebAssembly (WASM) deiner Meinung nach für die Konvergenz dieser Ansätze?</span></div>
+        <div class="q-label"><span class="q-num">16.</span><span>What role do you think WebAssembly (WASM) plays in closing the gap between these two approaches?</span></div>
         <div class="options">
-          <label class="opt-label"><input type="radio" name="q16" value="huge"> Sehr große Rolle – WASM verändert alles</label>
-          <label class="opt-label"><input type="radio" name="q16" value="moderate"> Mittlere Rolle – hilft, löst aber nicht alle Probleme</label>
-          <label class="opt-label"><input type="radio" name="q16" value="minor"> Geringe Rolle – macht für Entwickler kaum Unterschied</label>
-          <label class="opt-label"><input type="radio" name="q16" value="dontknow"> Ich bin mit WASM nicht vertraut</label>
+          <label class="opt-label"><input type="radio" name="q16" value="huge"> Major role – WASM is a game changer for browser performance</label>
+          <label class="opt-label"><input type="radio" name="q16" value="moderate"> Moderate role – helps, but doesn't solve all issues</label>
+          <label class="opt-label"><input type="radio" name="q16" value="minor"> Minor role – makes little practical difference for developers</label>
+          <label class="opt-label"><input type="radio" name="q16" value="dontknow"> I'm not familiar with WebAssembly</label>
         </div>
       </div>
 
       <div class="q-card" id="q17-card">
-        <div class="q-label"><span class="q-num">17.</span><span>Hast du schon beide Ansätze für dasselbe oder vergleichbare Projekte verwendet?</span></div>
+        <div class="q-label"><span class="q-num">17.</span><span>Have you used both approaches for the same or comparable projects?</span></div>
         <div class="options">
-          <label class="opt-label"><input type="radio" name="q17" value="yes-same"> Ja, für dasselbe Projekt</label>
-          <label class="opt-label"><input type="radio" name="q17" value="yes-diff"> Ja, für vergleichbare Projekte</label>
-          <label class="opt-label"><input type="radio" name="q17" value="no"> Nein, nur einen der Ansätze</label>
-          <label class="opt-label"><input type="radio" name="q17" value="no-exp"> Nein, noch gar keinen Ansatz</label>
+          <label class="opt-label"><input type="radio" name="q17" value="yes-same"> Yes, for the exact same project</label>
+          <label class="opt-label"><input type="radio" name="q17" value="yes-diff"> Yes, for comparable projects</label>
+          <label class="opt-label"><input type="radio" name="q17" value="no"> No, only one of the approaches</label>
+          <label class="opt-label"><input type="radio" name="q17" value="no-exp"> No, I haven't used either approach</label>
         </div>
       </div>
 
       <div class="q-card" id="q18-card">
-        <div class="q-label"><span class="q-num">18.</span><span>Falls du beide Ansätze kennst: Was war der ausschlaggebende Unterschied in deiner Erfahrung?</span></div>
-        <textarea name="q18" placeholder="Beschreibe kurz deinen persönlichen Vergleich – z.B. Workflow, Produktivität, Ergebnis …" rows="4"></textarea>
+        <div class="q-label"><span class="q-num">18.</span><span>If you know both approaches: what was the most decisive difference in your experience?</span></div>
+        <textarea name="q18" placeholder="Briefly describe your personal comparison – e.g. workflow, productivity, end result …" rows="4"></textarea>
       </div>
     </div>
 
@@ -973,39 +895,37 @@
     <div class="section" style="--i:5">
       <div class="section-header">
         <span class="section-num">06</span>
-        <span class="section-title">Offene Fragen &amp; Abschluss</span>
+        <span class="section-title">Open Questions &amp; Final Thoughts</span>
       </div>
 
       <div class="q-card" id="q19-card">
-        <div class="q-label"><span class="q-num">19.</span><span>Was spricht dich persönlich mehr an – das Arbeiten mit einem HTML5 Framework oder einer Game Engine? Warum?</span></div>
-        <textarea name="q19" placeholder="Deine persönliche Perspektive ist für die Bachelorarbeit besonders wertvoll …" rows="5"></textarea>
+        <div class="q-label"><span class="q-num">19.</span><span>Which approach appeals to you more personally – working with an HTML5 framework or a game engine? Why?</span></div>
+        <textarea name="q19" placeholder="Your personal perspective is especially valuable for this thesis …" rows="5"></textarea>
       </div>
 
       <div class="q-card" id="q20-card">
-        <div class="q-label"><span class="q-num">20.</span><span>Gibt es Aspekte beim Vergleich von HTML5 Frameworks und Game Engines, die aus deiner Sicht noch nicht ausreichend thematisiert wurden?</span></div>
-        <textarea name="q20" placeholder="Weitere Gedanken, Anmerkungen oder Empfehlungen für die Bachelorarbeit …" rows="4"></textarea>
+        <div class="q-label"><span class="q-num">20.</span><span>Are there any aspects of the HTML5 vs. game engine comparison that you feel haven't been covered enough?</span></div>
+        <textarea name="q20" placeholder="Further thoughts, comments or suggestions for the bachelor's thesis …" rows="4"></textarea>
       </div>
     </div>
 
-    <!-- SUBMIT -->
     <div class="submit-area">
       <button type="submit" class="submit-btn">
-        <span>Umfrage absenden</span>
+        <span>Submit Survey</span>
         <span>→</span>
       </button>
       <p class="submit-note">
-        Deine Antworten werden anonym gespeichert und ausschließlich für<br>
-        wissenschaftliche Zwecke im Rahmen einer Bachelorarbeit verwendet.
+        Your answers are stored anonymously and used exclusively<br>
+        for academic research as part of a bachelor's thesis.
       </p>
     </div>
 
   </form>
 
-  <!-- SUCCESS -->
   <div class="success-screen" id="success">
     <div class="success-icon">✦</div>
-    <h2>Vielen Dank!</h2>
-    <p>Deine Antworten wurden erfolgreich übermittelt. Du hilfst damit, den Vergleich zwischen HTML5 Frameworks und Game Engines fundiert zu untersuchen.</p>
+    <h2>Thank you!</h2>
+    <p>Your answers have been submitted successfully. You are helping to build a well-founded comparison between HTML5 frameworks and game engines.</p>
   </div>
 
 </div>
@@ -1017,10 +937,7 @@
     const form = document.getElementById('survey-form');
     const data = new FormData(form);
     const answered = new Set();
-    for (let [key] of data.entries()) {
-      answered.add(key);
-    }
-    // count textareas with content
+    for (let [key] of data.entries()) answered.add(key);
     document.querySelectorAll('textarea').forEach(t => {
       if (t.value.trim()) answered.add(t.name);
     });
@@ -1031,7 +948,7 @@
     const count = countAnswered();
     const pct = Math.round((count / TOTAL) * 100);
     document.getElementById('progress-fill').style.width = pct + '%';
-    document.getElementById('prog-text').textContent = count + ' / ' + TOTAL + ' Fragen';
+    document.getElementById('prog-text').textContent = count + ' / ' + TOTAL + ' Questions';
   }
 
   document.getElementById('survey-form').addEventListener('change', updateProgress);
@@ -1042,7 +959,7 @@
     document.getElementById('survey-form').style.display = 'none';
     document.getElementById('success').style.display = 'block';
     document.getElementById('progress-fill').style.width = '100%';
-    document.getElementById('prog-text').textContent = TOTAL + ' / ' + TOTAL + ' Fragen';
+    document.getElementById('prog-text').textContent = TOTAL + ' / ' + TOTAL + ' Questions';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 </script>
