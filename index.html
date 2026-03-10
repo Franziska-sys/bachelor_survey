@@ -21,10 +21,10 @@
   --text:     #e8e8f0;
   --muted:    #6b6b8a;
   --success:  #00e5a0;
+  --error:    #ff3d71;
 }
 
-/* Force dark background on ALL browsers incl. iOS */
-html { background: #0a0a0f; }
+html { background: #0a0a0f; scroll-behavior: smooth; }
 
 body {
   background: #0a0a0f;
@@ -182,6 +182,7 @@ h1 .hl2 { color: #ff3d71; }
   margin-bottom: 16px;
   position: relative;
   overflow: hidden;
+  transition: border-color 0.3s ease;
 }
 
 .q-card::before {
@@ -193,10 +194,32 @@ h1 .hl2 { color: #ff3d71; }
   transition: background 0.3s;
 }
 
-/* JS will add .card-active class */
 .q-card.card-active::before {
   background: linear-gradient(180deg, #00e5ff, #a259ff);
 }
+
+/* Validation error state */
+.q-card.has-error {
+  border-color: var(--error);
+  animation: shake 0.4s ease;
+}
+
+.q-card.has-error::before {
+  background: var(--error);
+}
+
+.q-error-msg {
+  display: none;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--error);
+  margin-top: 10px;
+  padding: 6px 10px;
+  background: rgba(255,61,113,0.08);
+  border-radius: 3px;
+}
+
+.q-card.has-error .q-error-msg { display: block; }
 
 .q-label {
   font-size: 15px;
@@ -220,7 +243,6 @@ h1 .hl2 { color: #ff3d71; }
   gap: 8px;
 }
 
-/* The label wrapper */
 .opt-label {
   display: flex;
   align-items: center;
@@ -230,7 +252,7 @@ h1 .hl2 { color: #ff3d71; }
   border-radius: 4px;
   padding: 13px 16px;
   cursor: pointer;
-  transition: border-color 0.15s, background 0.15s;
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
   font-size: 14px;
   color: #e8e8f0;
   -webkit-tap-highlight-color: transparent;
@@ -243,7 +265,10 @@ h1 .hl2 { color: #ff3d71; }
   background: rgba(0,229,255,0.04);
 }
 
-/* JS adds .is-checked */
+.opt-label:active {
+  transform: scale(0.985);
+}
+
 .opt-label.is-checked {
   border-color: #00e5ff;
   background: rgba(0,229,255,0.08);
@@ -251,7 +276,6 @@ h1 .hl2 { color: #ff3d71; }
 }
 
 /* ===== CUSTOM RADIO / CHECKBOX ===== */
-/* Hide native input completely */
 .opt-label input[type="radio"],
 .opt-label input[type="checkbox"] {
   -webkit-appearance: none;
@@ -268,15 +292,11 @@ h1 .hl2 { color: #ff3d71; }
   cursor: pointer;
   transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
   -webkit-tap-highlight-color: transparent;
-  /* Prevent iOS zoom on focus */
   font-size: 16px;
 }
 
-.opt-label input[type="checkbox"] {
-  border-radius: 4px;
-}
+.opt-label input[type="checkbox"] { border-radius: 4px; }
 
-/* Checked state */
 .opt-label input[type="radio"]:checked,
 .opt-label input[type="checkbox"]:checked {
   border-color: #00e5ff;
@@ -284,32 +304,24 @@ h1 .hl2 { color: #ff3d71; }
   box-shadow: 0 0 0 3px rgba(0,229,255,0.2);
 }
 
-/* Inner dot for radio */
 .opt-label input[type="radio"]:checked::after {
   content: "";
   display: block;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 7px;
-  height: 7px;
-  margin-top: -3.5px;
-  margin-left: -3.5px;
+  top: 50%; left: 50%;
+  width: 7px; height: 7px;
+  margin-top: -3.5px; margin-left: -3.5px;
   background: #0a0a0f;
   border-radius: 50%;
 }
 
-/* Checkmark for checkbox */
 .opt-label input[type="checkbox"]:checked::after {
   content: "";
   display: block;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 5px;
-  height: 9px;
-  margin-top: -6px;
-  margin-left: -2.5px;
+  top: 50%; left: 50%;
+  width: 5px; height: 9px;
+  margin-top: -6px; margin-left: -2.5px;
   border: 2px solid #0a0a0f;
   border-top: none;
   border-left: none;
@@ -343,7 +355,7 @@ h1 .hl2 { color: #ff3d71; }
   border-radius: 4px;
   background: #1a1a25;
   cursor: pointer;
-  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s, transform 0.1s;
   position: relative;
   -webkit-tap-highlight-color: transparent;
 }
@@ -351,6 +363,7 @@ h1 .hl2 { color: #ff3d71; }
 .scale-opt input[type="radio"]:hover {
   border-color: #00e5ff;
   background: rgba(0,229,255,0.06);
+  transform: scale(1.08);
 }
 
 .scale-opt input[type="radio"]:checked {
@@ -463,18 +476,54 @@ textarea {
   color: #e8e8f0;
   padding: 16px;
   font-family: 'Syne', sans-serif;
-  font-size: 16px; /* 16px prevents iOS zoom */
-  resize: none;
+  font-size: 16px;
+  resize: vertical;
   outline: none;
   min-height: 130px;
   line-height: 1.7;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
   -webkit-appearance: none;
   appearance: none;
 }
 
-textarea:focus { border-color: #00e5ff; }
+textarea:focus {
+  border-color: #00e5ff;
+  box-shadow: 0 0 0 3px rgba(0,229,255,0.1);
+}
+
 textarea::placeholder { color: #6b6b8a; }
+
+/* Character counter */
+.textarea-wrap { position: relative; }
+.char-count {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: #6b6b8a;
+  text-align: right;
+  margin-top: 4px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.textarea-wrap:focus-within .char-count { opacity: 1; }
+
+/* ===== "Other" text input ===== */
+.other-input {
+  width: 100%;
+  background: #1a1a25;
+  border: 1px solid #2a2a3a;
+  border-radius: 4px;
+  color: #e8e8f0;
+  padding: 10px 14px;
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  outline: none;
+  margin-top: 8px;
+  transition: border-color 0.2s;
+  display: none;
+}
+
+.other-input:focus { border-color: #00e5ff; }
+.other-input::placeholder { color: #6b6b8a; }
 
 /* ===== SUBMIT ===== */
 .submit-area { margin-top: 48px; text-align: center; animation: fadeUp 0.6s ease both; }
@@ -494,13 +543,20 @@ textarea::placeholder { color: #6b6b8a; }
   border-radius: 4px;
   border: none;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
   box-shadow: 0 0 30px rgba(0,229,255,0.2);
   -webkit-tap-highlight-color: transparent;
 }
 
 .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(0,229,255,0.35); }
 .submit-btn:active { transform: translateY(0); }
+
+.submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
 
 .submit-note {
   font-family: 'Space Mono', monospace;
@@ -510,16 +566,92 @@ textarea::placeholder { color: #6b6b8a; }
   line-height: 1.7;
 }
 
+/* Validation summary */
+.validation-summary {
+  display: none;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  color: var(--error);
+  background: rgba(255,61,113,0.08);
+  border: 1px solid rgba(255,61,113,0.25);
+  border-radius: 4px;
+  padding: 12px 18px;
+  margin-bottom: 20px;
+  text-align: left;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.8;
+}
+
 /* ===== SUCCESS ===== */
-.success-screen { display: none; text-align: center; padding: 80px 24px; animation: fadeUp 0.6s ease both; }
-.success-icon { font-size: 56px; margin-bottom: 20px; }
+.success-screen {
+  display: none;
+  text-align: center;
+  padding: 80px 24px;
+  animation: fadeUp 0.6s ease both;
+}
+
+.success-icon {
+  font-size: 56px;
+  margin-bottom: 20px;
+  animation: pulse 2s ease infinite;
+}
+
 .success-screen h2 { font-size: 28px; font-weight: 800; color: #00e5a0; margin-bottom: 12px; }
 .success-screen p { color: #6b6b8a; font-size: 15px; line-height: 1.6; max-width: 420px; margin: 0 auto; }
+
+/* Back-to-top (visible after scroll) */
+.back-to-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 200;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: rgba(17,17,24,0.9);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: var(--accent);
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.back-to-top.visible { opacity: 1; pointer-events: auto; }
+.back-to-top:hover { transform: translateY(-2px); background: rgba(0,229,255,0.1); }
+
+/* ===== KEYBOARD NAV ===== */
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
 
 /* ===== ANIMATIONS ===== */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
 
 /* ===== RESPONSIVE ===== */
@@ -528,11 +660,22 @@ textarea::placeholder { color: #6b6b8a; }
   .scale-opt input[type="radio"] { width: 32px; height: 32px; min-width: 32px; }
   .compare-table th, .compare-table td { padding: 8px 4px; font-size: 11px; }
   .compare-table input[type="radio"] { width: 18px; height: 18px; min-width: 18px; }
+  .back-to-top { bottom: 16px; right: 16px; }
+}
+
+/* ===== PRINT ===== */
+@media print {
+  .progress-wrap, .back-to-top, .noise { display: none !important; }
+  body::before { display: none; }
+  body { background: #fff; color: #111; }
+  .q-card { border: 1px solid #ccc; break-inside: avoid; }
 }
 </style>
 </head>
 <body>
 <div class="noise"></div>
+
+<button class="back-to-top" id="btt" aria-label="Back to top" title="Back to top">&#8593;</button>
 
 <div class="progress-wrap">
   <div class="progress-inner">
@@ -562,45 +705,49 @@ textarea::placeholder { color: #6b6b8a; }
     </div>
   </header>
 
-<form id="survey-form">
+<form id="survey-form" novalidate>
 
     <!-- ===== SECTION 1 ===== -->
     <div class="section" style="--i:0">
       <div class="section-header">
         <span class="section-num">01</span>
-        <span class="section-title">Background & Experience</span>
+        <span class="section-title">Background &amp; Experience</span>
       </div>
 
-      <div class="q-card" id="q1-card">
+      <div class="q-card" id="q1-card" data-required="q1" data-type="radio">
         <div class="q-label"><span class="q-num">1.</span><span>How would you rate your overall experience in software development? <span class="q-required">*</span></span></div>
         <div class="options">
-          <label class="opt-label"><input type="radio" name="q1" value="beginner" required> Beginner (0–1 year)</label>
+          <label class="opt-label"><input type="radio" name="q1" value="beginner"> Beginner (0–1 year)</label>
           <label class="opt-label"><input type="radio" name="q1" value="intermediate"> Intermediate (2–4 years)</label>
           <label class="opt-label"><input type="radio" name="q1" value="experienced"> Experienced (5–9 years)</label>
           <label class="opt-label"><input type="radio" name="q1" value="expert"> Expert (10+ years)</label>
         </div>
+        <div class="q-error-msg">Please select an option.</div>
       </div>
 
-      <div class="q-card" id="q2-card">
+      <div class="q-card" id="q2-card" data-required="q2" data-type="radio">
         <div class="q-label"><span class="q-num">2.</span><span>What is your primary field of work or study? <span class="q-required">*</span></span></div>
         <div class="options grid-2">
-          <label class="opt-label"><input type="radio" name="q2" value="webdev" required> Web Development</label>
+          <label class="opt-label"><input type="radio" name="q2" value="webdev"> Web Development</label>
           <label class="opt-label"><input type="radio" name="q2" value="gamedev"> Game Development</label>
           <label class="opt-label"><input type="radio" name="q2" value="software"> Software Engineering</label>
           <label class="opt-label"><input type="radio" name="q2" value="design"> Game Design / UX</label>
           <label class="opt-label"><input type="radio" name="q2" value="student"> Student (CS / Media)</label>
           <label class="opt-label"><input type="radio" name="q2" value="other"> Other</label>
         </div>
+        <input type="text" class="other-input" id="q2-other" name="q2_other" placeholder="Please specify your field…" maxlength="100">
+        <div class="q-error-msg">Please select an option.</div>
       </div>
 
-      <div class="q-card" id="q3-card">
+      <div class="q-card" id="q3-card" data-required="q3" data-type="radio">
         <div class="q-label"><span class="q-num">3.</span><span>Have you previously developed games or interactive applications? <span class="q-required">*</span></span></div>
         <div class="options">
-          <label class="opt-label"><input type="radio" name="q3" value="none" required> No, not yet</label>
+          <label class="opt-label"><input type="radio" name="q3" value="none"> No, not yet</label>
           <label class="opt-label"><input type="radio" name="q3" value="hobby"> Yes, as a hobby / personal project</label>
           <label class="opt-label"><input type="radio" name="q3" value="study"> Yes, during studies / training</label>
           <label class="opt-label"><input type="radio" name="q3" value="professional"> Yes, professionally</label>
         </div>
+        <div class="q-error-msg">Please select an option.</div>
       </div>
     </div>
 
@@ -611,7 +758,7 @@ textarea::placeholder { color: #6b6b8a; }
         <span class="section-title">Experience with HTML5 Frameworks</span>
       </div>
 
-      <div class="q-card" id="q4-card">
+      <div class="q-card" id="q4-card" data-required="q4" data-type="checkbox">
         <div class="q-label"><span class="q-num">4.</span><span>Which HTML5 frameworks / libraries for game development have you used? <span class="q-required">*</span></span></div>
         <div class="options grid-2">
           <label class="opt-label"><input type="checkbox" name="q4" value="phaser"> Phaser 3 / Phaser CE</label>
@@ -621,8 +768,9 @@ textarea::placeholder { color: #6b6b8a; }
           <label class="opt-label"><input type="checkbox" name="q4" value="cocos"> Cocos2D-JS</label>
           <label class="opt-label"><input type="checkbox" name="q4" value="excalibur"> Excalibur.js</label>
           <label class="opt-label"><input type="checkbox" name="q4" value="canvas-vanilla"> Vanilla Canvas / WebGL</label>
-          <label class="opt-label"><input type="checkbox" name="q4" value="none-html"> None yet</label>
+          <label class="opt-label"><input type="checkbox" name="q4" value="none-html" data-exclusive> None yet</label>
         </div>
+        <div class="q-error-msg">Please select at least one option.</div>
       </div>
 
       <div class="q-card" id="q5-card">
@@ -671,7 +819,7 @@ textarea::placeholder { color: #6b6b8a; }
         <span class="section-title">Experience with Game Engines</span>
       </div>
 
-      <div class="q-card" id="q8-card">
+      <div class="q-card" id="q8-card" data-required="q8" data-type="checkbox">
         <div class="q-label"><span class="q-num">8.</span><span>Which game engines have you used or worked with? <span class="q-required">*</span></span></div>
         <div class="options grid-2">
           <label class="opt-label"><input type="checkbox" name="q8" value="unity"> Unity</label>
@@ -681,8 +829,9 @@ textarea::placeholder { color: #6b6b8a; }
           <label class="opt-label"><input type="checkbox" name="q8" value="gd2"> Construct / GDevelop</label>
           <label class="opt-label"><input type="checkbox" name="q8" value="defold"> Defold</label>
           <label class="opt-label"><input type="checkbox" name="q8" value="rpgmaker"> RPG Maker</label>
-          <label class="opt-label"><input type="checkbox" name="q8" value="none-engine"> None yet</label>
+          <label class="opt-label"><input type="checkbox" name="q8" value="none-engine" data-exclusive> None yet</label>
         </div>
+        <div class="q-error-msg">Please select at least one option.</div>
       </div>
 
       <div class="q-card" id="q9-card">
@@ -731,7 +880,7 @@ textarea::placeholder { color: #6b6b8a; }
         <span class="section-title">Direct Comparison &amp; Preference</span>
       </div>
 
-      <div class="q-card" id="q12-card">
+      <div class="q-card" id="q12-card" data-required="cmp1,cmp2,cmp3,cmp4,cmp5,cmp6" data-type="radio-group">
         <div class="q-label"><span class="q-num">12.</span><span>Which approach would you prefer for each game type? <span class="q-required">*</span></span></div>
         <div class="note">Select one option per row.</div>
         <br>
@@ -783,16 +932,18 @@ textarea::placeholder { color: #6b6b8a; }
             </tr>
           </tbody>
         </table>
+        <div class="q-error-msg">Please fill in all rows.</div>
       </div>
 
-      <div class="q-card" id="q13-card">
+      <div class="q-card" id="q13-card" data-required="q13" data-type="radio">
         <div class="q-label"><span class="q-num">13.</span><span>If you were starting a new browser-based game today – which approach would you choose? <span class="q-required">*</span></span></div>
         <div class="options">
-          <label class="opt-label"><input type="radio" name="q13" value="html5" required> HTML5 Framework (e.g. Phaser, PixiJS)</label>
+          <label class="opt-label"><input type="radio" name="q13" value="html5"> HTML5 Framework (e.g. Phaser, PixiJS)</label>
           <label class="opt-label"><input type="radio" name="q13" value="engine"> Game Engine with web export (e.g. Unity, Godot)</label>
           <label class="opt-label"><input type="radio" name="q13" value="depends"> Depends on the project</label>
           <label class="opt-label"><input type="radio" name="q13" value="unsure"> Not sure yet</label>
         </div>
+        <div class="q-error-msg">Please select an option.</div>
       </div>
 
       <div class="q-card" id="q14-card">
@@ -897,7 +1048,10 @@ textarea::placeholder { color: #6b6b8a; }
 
       <div class="q-card" id="q18-card">
         <div class="q-label"><span class="q-num">18.</span><span>If you know both approaches: what was the most decisive difference in your experience?</span></div>
-        <textarea name="q18" placeholder="Briefly describe your personal comparison – e.g. workflow, productivity, end result …"></textarea>
+        <div class="textarea-wrap">
+          <textarea name="q18" placeholder="Briefly describe your personal comparison – e.g. workflow, productivity, end result …" maxlength="2000"></textarea>
+          <div class="char-count"><span class="char-current">0</span> / 2000</div>
+        </div>
       </div>
     </div>
 
@@ -910,19 +1064,26 @@ textarea::placeholder { color: #6b6b8a; }
 
       <div class="q-card" id="q19-card">
         <div class="q-label"><span class="q-num">19.</span><span>Which approach appeals to you more personally – working with an HTML5 framework or a game engine? Why?</span></div>
-        <textarea name="q19" placeholder="Your personal perspective is especially valuable for this thesis …"></textarea>
+        <div class="textarea-wrap">
+          <textarea name="q19" placeholder="Your personal perspective is especially valuable for this thesis …" maxlength="2000"></textarea>
+          <div class="char-count"><span class="char-current">0</span> / 2000</div>
+        </div>
       </div>
 
       <div class="q-card" id="q20-card">
         <div class="q-label"><span class="q-num">20.</span><span>Are there any aspects of the HTML5 vs. game engine comparison that you feel haven't been covered enough?</span></div>
-        <textarea name="q20" placeholder="Further thoughts, comments or suggestions for the bachelor's thesis …"></textarea>
+        <div class="textarea-wrap">
+          <textarea name="q20" placeholder="Further thoughts, comments or suggestions for the bachelor's thesis …" maxlength="2000"></textarea>
+          <div class="char-count"><span class="char-current">0</span> / 2000</div>
+        </div>
       </div>
     </div>
 
     <div class="submit-area">
-      <button type="submit" class="submit-btn">
+      <div class="validation-summary" id="validation-summary"></div>
+      <button type="submit" class="submit-btn" id="submit-btn">
         <span>Submit Survey</span>
-        <span>→</span>
+        <span>&#8594;</span>
       </button>
       <p class="submit-note">
         Your answers are stored anonymously and used exclusively<br>
@@ -940,20 +1101,28 @@ textarea::placeholder { color: #6b6b8a; }
 </div>
 
 <script>
-  const TOTAL = 20;
+(function() {
+  'use strict';
+
+  var TOTAL = 20;
+  var form = document.getElementById('survey-form');
 
   /* ---- Highlight card when any input inside is checked ---- */
   function updateCardHighlight(input) {
-    const card = input.closest('.q-card');
+    var card = input.closest('.q-card');
     if (!card) return;
-    const hasChecked = card.querySelector('input:checked') !== null;
-    card.classList.toggle('card-active', hasChecked);
+    var hasChecked = card.querySelector('input:checked') !== null;
+    var hasText = false;
+    var ta = card.querySelector('textarea');
+    if (ta && ta.value.trim()) hasText = true;
+    card.classList.toggle('card-active', hasChecked || hasText);
+    // Clear error on interaction
+    card.classList.remove('has-error');
   }
 
-  /* ---- .is-checked on opt-label (iOS :has() fallback) ---- */
+  /* ---- .is-checked on opt-label ---- */
   function updateOptLabel(input) {
     if (input.type === 'radio') {
-      // Uncheck siblings
       document.querySelectorAll('input[name="' + input.name + '"]').forEach(function(r) {
         var lbl = r.closest('.opt-label');
         if (lbl) lbl.classList.remove('is-checked');
@@ -966,11 +1135,53 @@ textarea::placeholder { color: #6b6b8a; }
     }
   }
 
+  /* ---- Exclusive checkbox logic ("None yet" deselects others) ---- */
+  function handleExclusiveCheckbox(input) {
+    if (!input.dataset.exclusive && !input.hasAttribute('data-exclusive')) return;
+    var name = input.name;
+    if (input.checked) {
+      document.querySelectorAll('input[name="' + name + '"]').forEach(function(cb) {
+        if (cb !== input) {
+          cb.checked = false;
+          updateOptLabel(cb);
+        }
+      });
+    }
+  }
+
+  function handleNonExclusiveCheckbox(input) {
+    if (input.dataset.exclusive || input.hasAttribute('data-exclusive')) return;
+    var name = input.name;
+    if (input.checked) {
+      var exclusive = document.querySelector('input[name="' + name + '"][data-exclusive]');
+      if (exclusive && exclusive.checked) {
+        exclusive.checked = false;
+        updateOptLabel(exclusive);
+      }
+    }
+  }
+
+  /* ---- "Other" field toggle for Q2 ---- */
+  function toggleOtherField() {
+    var otherRadio = document.querySelector('input[name="q2"][value="other"]');
+    var otherInput = document.getElementById('q2-other');
+    if (otherRadio && otherInput) {
+      otherInput.style.display = otherRadio.checked ? 'block' : 'none';
+      if (otherRadio.checked) otherInput.focus();
+    }
+  }
+
+  /* ---- Bind events ---- */
   document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(function(inp) {
     inp.addEventListener('change', function() {
+      if (this.type === 'checkbox') {
+        handleExclusiveCheckbox(this);
+        handleNonExclusiveCheckbox(this);
+      }
       updateOptLabel(this);
       updateCardHighlight(this);
       updateProgress();
+      if (this.name === 'q2') toggleOtherField();
     });
   });
 
@@ -979,7 +1190,16 @@ textarea::placeholder { color: #6b6b8a; }
       var c = this.closest('.q-card');
       if (c) c.classList.add('card-active');
     });
-    t.addEventListener('input', updateProgress);
+    t.addEventListener('input', function() {
+      updateProgress();
+      updateCardHighlight(this);
+      // Char counter
+      var wrap = this.closest('.textarea-wrap');
+      if (wrap) {
+        var counter = wrap.querySelector('.char-current');
+        if (counter) counter.textContent = this.value.length;
+      }
+    });
   });
 
   /* ---- Progress bar ---- */
@@ -997,15 +1217,121 @@ textarea::placeholder { color: #6b6b8a; }
     document.getElementById('prog-text').textContent = count + ' / ' + TOTAL + ' Questions';
   }
 
+  /* ---- Validation ---- */
+  function validateRequired() {
+    var errors = [];
+    var firstErrorCard = null;
+
+    document.querySelectorAll('.q-card[data-required]').forEach(function(card) {
+      var names = card.getAttribute('data-required').split(',');
+      var type = card.getAttribute('data-type');
+      var valid = true;
+
+      if (type === 'radio') {
+        valid = document.querySelector('input[name="' + names[0] + '"]:checked') !== null;
+      } else if (type === 'checkbox') {
+        valid = document.querySelector('input[name="' + names[0] + '"]:checked') !== null;
+      } else if (type === 'radio-group') {
+        // All sub-names must have a selection
+        valid = names.every(function(n) {
+          return document.querySelector('input[name="' + n.trim() + '"]:checked') !== null;
+        });
+      }
+
+      if (!valid) {
+        card.classList.add('has-error');
+        var qNum = card.querySelector('.q-num');
+        errors.push('Question ' + (qNum ? qNum.textContent.trim() : ''));
+        if (!firstErrorCard) firstErrorCard = card;
+      } else {
+        card.classList.remove('has-error');
+      }
+    });
+
+    return { errors: errors, firstErrorCard: firstErrorCard };
+  }
+
   /* ---- Submit ---- */
-  document.getElementById('survey-form').addEventListener('submit', function(e) {
+  form.addEventListener('submit', function(e) {
     e.preventDefault();
-    this.style.display = 'none';
+
+    var result = validateRequired();
+    var summary = document.getElementById('validation-summary');
+
+    if (result.errors.length > 0) {
+      summary.style.display = 'block';
+      summary.innerHTML = '&#9888; Please complete the required fields: ' + result.errors.join(', ');
+
+      // Scroll to first error
+      if (result.firstErrorCard) {
+        result.firstErrorCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return;
+    }
+
+    summary.style.display = 'none';
+
+    // Collect data (for real use, replace with actual submission)
+    var formData = new FormData(form);
+    var data = {};
+    formData.forEach(function(value, key) {
+      if (data[key]) {
+        if (!Array.isArray(data[key])) data[key] = [data[key]];
+        data[key].push(value);
+      } else {
+        data[key] = value;
+      }
+    });
+    console.log('Survey data:', data);
+
+    // Show success
+    form.style.display = 'none';
     document.getElementById('success').style.display = 'block';
     document.getElementById('progress-fill').style.width = '100%';
     document.getElementById('prog-text').textContent = TOTAL + ' / ' + TOTAL + ' Questions';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
+
+  /* ---- Back to top button ---- */
+  var btt = document.getElementById('btt');
+  btt.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  var scrollTicking = false;
+  window.addEventListener('scroll', function() {
+    if (!scrollTicking) {
+      requestAnimationFrame(function() {
+        btt.classList.toggle('visible', window.scrollY > 400);
+        scrollTicking = false;
+      });
+      scrollTicking = true;
+    }
+  }, { passive: true });
+
+  /* ---- Keyboard: Enter on scale to move to next ---- */
+  document.querySelectorAll('.scale-opt input[type="radio"]').forEach(function(inp) {
+    inp.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        var next = this.closest('.scale-opt').nextElementSibling;
+        if (next) {
+          var r = next.querySelector('input[type="radio"]');
+          if (r) { r.checked = true; r.focus(); r.dispatchEvent(new Event('change', {bubbles:true})); }
+        }
+      }
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        var prev = this.closest('.scale-opt').previousElementSibling;
+        if (prev) {
+          var r = prev.querySelector('input[type="radio"]');
+          if (r) { r.checked = true; r.focus(); r.dispatchEvent(new Event('change', {bubbles:true})); }
+        }
+      }
+    });
+  });
+
+})();
 </script>
 </body>
 </html>
