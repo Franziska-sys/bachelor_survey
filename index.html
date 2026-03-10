@@ -1251,18 +1251,21 @@ textarea::placeholder { color: #6b6b8a; }
     return { errors: errors, firstErrorCard: firstErrorCard };
   }
 
+  /* ---- Configuration ---- */
+  // PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE:
+  var SUBMIT_URL = 'https://script.google.com/macros/s/AKfycbwGSv-2SopRPpsKyFznVHKiNlBteMgJOTFG3Y6wFwT4-6C6adxR4zXkj7lACUbgFpJd/exec';
+
   /* ---- Submit ---- */
   form.addEventListener('submit', function(e) {
     e.preventDefault();
 
     var result = validateRequired();
     var summary = document.getElementById('validation-summary');
+    var submitBtn = document.getElementById('submit-btn');
 
     if (result.errors.length > 0) {
       summary.style.display = 'block';
       summary.innerHTML = '&#9888; Please complete the required fields: ' + result.errors.join(', ');
-
-      // Scroll to first error
       if (result.firstErrorCard) {
         result.firstErrorCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
@@ -1271,7 +1274,7 @@ textarea::placeholder { color: #6b6b8a; }
 
     summary.style.display = 'none';
 
-    // Collect data (for real use, replace with actual submission)
+    // Collect form data into a clean object
     var formData = new FormData(form);
     var data = {};
     formData.forEach(function(value, key) {
@@ -1282,15 +1285,56 @@ textarea::placeholder { color: #6b6b8a; }
         data[key] = value;
       }
     });
-    console.log('Survey data:', data);
 
-    // Show success
+    // Convert arrays to comma-separated strings for the spreadsheet
+    Object.keys(data).forEach(function(key) {
+      if (Array.isArray(data[key])) data[key] = data[key].join(', ');
+    });
+
+    // Add metadata (no personal data — GDPR safe)
+    data._timestamp = new Date().toISOString();
+    data._userAgent = navigator.userAgent;
+    data._language = navigator.language;
+
+    // Loading state
+    submitBtn.disabled = true;
+    submitBtn.querySelector('span:first-child').textContent = 'Submitting…';
+
+    // Send to Google Apps Script
+    fetch(SUBMIT_URL, {
+      method: 'POST',
+      mode: 'no-cors', // Required for Apps Script
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    .then(function() {
+      // no-cors always resolves (opaque response), so we trust it went through
+      showSuccess();
+    })
+    .catch(function(err) {
+      console.error('Submit error:', err);
+      // Fallback: save locally so no data is lost
+      try {
+        var blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'survey-response-' + Date.now() + '.json';
+        a.click();
+      } catch(e) {}
+      summary.style.display = 'block';
+      summary.innerHTML = '&#9888; Network error — your response was saved as a file. You can email it to the researcher.';
+      submitBtn.disabled = false;
+      submitBtn.querySelector('span:first-child').textContent = 'Submit Survey';
+    });
+  });
+
+  function showSuccess() {
     form.style.display = 'none';
     document.getElementById('success').style.display = 'block';
     document.getElementById('progress-fill').style.width = '100%';
     document.getElementById('prog-text').textContent = TOTAL + ' / ' + TOTAL + ' Questions';
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+  }
 
   /* ---- Back to top button ---- */
   var btt = document.getElementById('btt');
