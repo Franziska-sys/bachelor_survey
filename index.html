@@ -1106,6 +1106,12 @@ textarea::placeholder { color: #6b6b8a; }
 
   var TOTAL = 20;
   var form = document.getElementById('survey-form');
+  
+/* ---- One-submission guard (localStorage) ---- */
+var STORAGE_KEY = 'survey_html5_vs_engines_done';
+if (localStorage.getItem(STORAGE_KEY)) {
+  showSuccess();
+}
 
   /* ---- Highlight card when any input inside is checked ---- */
   function updateCardHighlight(input) {
@@ -1328,13 +1334,14 @@ textarea::placeholder { color: #6b6b8a; }
     });
   });
 
-  function showSuccess() {
-    form.style.display = 'none';
-    document.getElementById('success').style.display = 'block';
-    document.getElementById('progress-fill').style.width = '100%';
-    document.getElementById('prog-text').textContent = TOTAL + ' / ' + TOTAL + ' Questions';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+	function showSuccess() {
+	  try { localStorage.setItem(STORAGE_KEY, '1'); } catch(e) {}
+	  form.style.display = 'none';
+		document.getElementById('success').style.display = 'block';
+		document.getElementById('progress-fill').style.width = '100%';
+		document.getElementById('prog-text').textContent = TOTAL + ' / ' + TOTAL + ' Questions';
+		window.scrollTo({ top: 0, behavior: 'smooth' });
+	  }
 
   /* ---- Back to top button ---- */
   var btt = document.getElementById('btt');
