@@ -1,4 +1,4 @@
-Survey: HTML5 Frameworks vs. Game Engines
+#Survey: HTML5 Frameworks vs. Game Engines
 
 A static single-page survey (HTML/CSS/JS) for a bachelor's thesis comparing browser-based game development approaches.
 
